@@ -10,7 +10,7 @@
 
 ## Description
 
-This project is a classic TODO list made with React, created for a WBS Coding School assignment.
+This project is the start of an image sharing plattform, created for a WBS Coding School assignment.
 
 ## Organisation
 
