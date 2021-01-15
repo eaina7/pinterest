@@ -18,6 +18,11 @@ This project is the start of an image sharing plattform, created for a WBS Codin
 
 ## Design
 
+This are the wireframes of our application:
+
+- [Main page](./design/wireframe_home.png)
+- [Post details page](./design/wireframe_post_details.png)
+
 ## Live
 
 ## Programming
