@@ -11,40 +11,50 @@
 
 ### Admin
 
-Follow these steps in order to set-up a repository:
+Follow these steps in order to set-up a React application and connect it to Github:
 
-1. Create a repository on [Github](https://github.com/)
-2. Clone repository to your local machine:
+1. Create a React application:
 
-```
-$ git clone [url provided on Github]
-```
-
-3. Create a development branch locally:
+```bash
+npx create-react-app your_react_app_name
 
 ```
+
+2. Create a repository on [Github](https://github.com/). Since the React app already contains a git repo, no need to initialize a git repo locally or clone from GitHub.
+
+3. Link your local repo with Gihub:
+
+```bash
+git remote add origin address_to_your_github_repo.git
+```
+
+3. Rename master branch to main:
+
+```bash
+$ git checkout master
+$ git -M main
+```
+
+4. Create a development branch locally:
+
+```bash
 $ git checkout -b dev
 ```
 
-4. Create the initial folder structure and files (files and folders provided here are only an example):
+5. Delete any files you don't need from the initial React app.
 
-```
-$ touch index.html
-$ touch style.css
+6. Commit and push your changes:
+
+```bash
 $ git add .
 $ git commit -m "Initial commit"
-```
-
-5. Push changes to remote dev branch:
-
-```
 $ git push origin dev
 ```
 
-6. Add team members as contributors on Github:
+7. Add team members as contributors on Github:
    ![](./img/github_collaborators.png)
 
-7. Change default branch to dev
+8. Change default branch to dev
 
 ### Contributors
 
