@@ -38,6 +38,7 @@ Views are composed of components as described on the wireframes:
 1. _Posts_
 
 - Route "/posts"
+- Route "/posts/user/{userId}
 - Route "/posts/highrating"
 
   These two routes will show results after applying the filters set by the user.
