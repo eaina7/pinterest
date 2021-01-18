@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
+import "./index.css";
+
 
 function Footer() {
     return (
-        <div>
-            <footer>
+        <footer>
             <div class="copyright">COPYRIGHT &#169; Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, harum</div>
         </footer>
-        </div>
     )
 }
 
-export default Footer
+export default Footer;
