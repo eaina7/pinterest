@@ -1,38 +1,312 @@
-.App {
-  text-align: center;
+main {
+  min-height: 75vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*------Header---------------*/
+header {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-heading {
+  width: 50%;
+  display: flex;
+  padding-left: 2rem;
+  flex-direction: row;
+  font-size: 5rem;
+  font-family: "Dancing Script", sans-serif;
+  text-align: left;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.search-wrapper {
+  width: 50%;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-search {
+  width: 50%;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  color: #fff;
+  background-color: rgb(121, 121, 121);
+  border: 2px solid #fff;
+  border-radius: 1.5rem;
+  font-family:"Roboto", sans-serif;
+  font-size: 2rem;
+  transition: all .2s;
+}
+
+.header-search:hover {
+  background-color: rgb(100, 100, 100);
+}
+
+.search-button {
+  height: 3.5rem;
+  width: 9rem;
+  margin-left: 1rem;
+  color: #fff;
+  background-color: rgb(100, 100, 100);
+  border: 2px solid #fff;
+  border-radius: 1.5rem;
+  font-family:"Roboto", sans-serif;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.search-button:hover {
+  background-color: rgb(78, 140, 255);
+}
+
+/*------Top-navigation---------------*/
+
+.buttons-wrapper {
+  width: 90%;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem auto;
+  background-color: rgb(100, 100, 100);
+  border-radius: 1rem;
+}
+
+.home-button {
+  height: 3rem;
+  background-color: rgb(100, 100, 100);
+  color:#fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 2.5rem;
+  border: none;
+}
+
+.home-button:hover {
+  height: 2.8rem;
+  border-bottom: 2px solid #fff;
+}
+
+.line {
+  width: .3rem;
+  height: 3rem;
+  margin: 0 3rem;
+  background-color: #fff;
+}
+
+.user-selection {
+  height: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 2.5rem; 
+}
+
+#users {
+  height: 2.7rem;
+  min-width: 8rem;
+  margin-left: 1rem;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  font-size: 1.7rem;
+  border: 2px solid #fff;
+  border-radius: 1rem;
+}
+
+.user-search-button {
+  height: 2.7rem;
+  width: 8rem;
+  margin-left: 1rem;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem; 
+  transition: all .2s;
+}
+
+.user-search-button:hover {
+  background-color: rgb(78, 140, 255);
+}
+
+.checkbox-wrapper {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox-desc {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 2.5rem;
+}
+
+.post-checkbox {
+  width: 2rem;
+  height: 2rem;
+  margin: .25rem 0 0 1rem;
+  cursor: pointer;
+}
+
+.post-checkbox:hover {
+  border: 3px solid rgb(54, 54, 54);
+}
+
+/*------Images-wrapper---------------*/
+
+.images-wrapper {
+  width: 90%;
+  min-height: 40vh;
+  margin: 0 auto;
+  padding: 4rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgb(150, 150, 150);
+  border-radius: 2rem;
+}
+
+.post-image-wrapper {
+  position: relative;
+  width: 30rem;
+  height: 35rem;
+  margin: .8%;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgb(100, 100, 100);
+  transition: all .2s;
+}
+
+.post-image-wrapper:hover {
+  overflow: visible;
+  z-index: 10;
+}
+
+.post-image {
+  position: absolute;
+  left:-25%;
+  height: 100%;
+  opacity: .5;
+  border-radius: 1rem;
+  transition: all .2s;
+}
+
+.post-image-wrapper:hover .post-image{
+  opacity: 1;
+  box-shadow: 0 .5rem 1rem rgb(49, 49, 49);
+  transform: scale(1.1);
+}
+
+.overlay {
+  width: 90%;
+  position: absolute;
+  top: 20%;
+  left: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.post-image-wrapper:hover .overlay{
+  opacity: 0;
+}
+
+.post-image-desc {
+  width: 20rem;
+  margin: 1rem;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+}
+
+/*------------------------------------------*/
+/*------Image-Preview-----------------------*/
+/*------------------------------------------*/
+
+.post-entry {
+  width: 80%;
+  min-height: 70vh;
+  margin: 7rem auto;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
+  background-color: rgb(150, 150, 150);
+  color:#fff;
+  font-family: "Roboto", sans-serif;
+  border-radius: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.post-entry__left-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 2px solid #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.post-entry__right-wrapper {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2% 0;
+  margin: 0 auto;
+}
+
+.post-entry__title {
+  margin: 3%;
+  font-size: 4rem;
+  font-family: "Dancing Script", sans-serif;
+}
+
+.post-entry__image {
+  width: 90%;
+  border: 2px solid #fff;
+}
+
+.post-entry__home-btn {
+  width: 13%;
+  height: 3rem;
+  align-self: flex-end;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 1.2rem;
+  font-size: 2rem;
+  transition: all .2s;
+}
+
+.post-entry__home-btn:hover {
+  background-color: rgb(78, 140, 255);
+}
+
+.post-entry__date,
+.post-entry__rating {
+  font-size: 2rem;
+  letter-spacing: .5px;
+}
+
+.post-entry__description {
+  margin: 1% 0 6% 0;
+  font-size: 2.5rem;
+}
+
+.post-entry__user {
+  font-size: 2rem;
+  margin-bottom: 6rem;
 }
