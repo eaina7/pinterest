@@ -4,6 +4,7 @@
 
 - [Components](#components)
 - [Views](#views)
+- [Pages](#pages)
 - [Pending](#pending)
 
 ## Components
@@ -46,6 +47,16 @@ Views are composed of components as described on the wireframes:
 2. _PostDetails_
 
 - Route "posts/{postId}"
+
+## Pages
+
+### Main page
+
+![](./img/main_page_components.png)
+
+### Post detailed page
+
+![](./img/post_detailed_page_components.png)
 
 ## Pending
 
