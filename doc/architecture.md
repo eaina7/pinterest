@@ -38,15 +38,15 @@ Views are composed of components as described on the wireframes:
 
 1. _Posts_
 
-- Route "/posts"
-- Route "/posts/user/{userId}
-- Route "/posts/highrating"
+- Route "/posts": all posts
+- Route "/posts/user/{userId}: only posts by user with id = _userId_
+- Route "/posts/highrating": only posts with high rating (to be defined)
 
-  These two routes will show results after applying the filters set by the user.
+  These routes will show results after applying the filters set by the user.
 
 2. _PostDetails_
 
-- Route "posts/{postId}"
+- Route "posts/{postId}": only post with id = _postId_
 
 ## Pages
 
