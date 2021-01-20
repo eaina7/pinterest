@@ -13,7 +13,7 @@ function App() {
       return response.data.items;
     };
     getPostArray().then(response => {
-      console.log(response)
+      console.log(response[0].fields.image)
       setPostsArray(response)
     });
   }, []);
