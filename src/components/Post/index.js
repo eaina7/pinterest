@@ -1,15 +1,16 @@
 import React from 'react';
+
 import './index.css';
 
-export default function Post({array}) {
 
+export default function Post({post}) {
     return (
-        <div class='post-image-wrapper'>
-            <img class='post-image' src={array[id].image} />
-            <div class='overlay'>
-              <p class='post-image-desc'>Title: {array[id].title}</p>
-              <p class='post-image-desc'>User: {array[id].userName}</p>
+        <div className='post-image-wrapper'>
+            <img className='post-image' src={post.fields.image} />
+            <div className='overlay'>
+              <p className='post-image-desc'><strong>Title:</strong> {post.fields.title}</p>
+              <p className='post-image-desc'><strong>User:</strong> {post.fields.userref.sys.id}</p>
             </div>
-          </div>
+        </div>
     );
 }
