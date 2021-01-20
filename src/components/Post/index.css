@@ -43,12 +43,19 @@
   opacity: 0;
 }
 
-.post-image-desc {
+.post-image-desc,
+.post-image-desc-title {
   width: 90%;
   margin: .8rem auto;
   color: #fff;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.15rem;
   text-align: center;
+}
+
+.post-image-desc-title {
+  font-size: 1.7rem ;
+  font-weight: 500;
+  text-decoration: underline;
 }
