@@ -3,6 +3,7 @@ import React from 'react';
 import './index.css';
 
 
+
 export default function Post({post}) {
     return (
         <div className='post-image-wrapper'>

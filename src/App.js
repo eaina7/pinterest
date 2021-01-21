@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import './App.css';
 
@@ -6,7 +7,11 @@ import Postlist from './components/Postlist';
 import Footer from './components/Footer';
 
 function App() {
-  const [postsArray, setPostsArray] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [userPosts , setUserPosts] = useState([]);
+  const [currentArray, setCurrentArray] = useState([]);
+  const [userArray, setUserArray] = useState([]);
+  const [userChosen, setUserChosen] = useState("");
 
   useEffect(() => {
     const getPostArray = async() => {
@@ -14,21 +19,41 @@ function App() {
       .get("https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c")
       return response.data.items;
     };
+
+    const getUserArray = async() => {
+      const response = await axios
+      .get("https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c")
+      return response.data;
+    }
     getPostArray().then(response => {
-      console.log(response[0].fields.image)
-      setPostsArray(response)
+      setAllPosts(response)
+      setCurrentArray(response)
     });
+
+    getUserArray().then(response =>{
+      //console.log(response.items);
+      setUserArray([response.items]);
+    })
   }, []);
 
-  //console.log(postsArray);
+
+  const postFilter = () => {
+    const filteredPosts = allPosts.filter((post) => {
+        return post.fields.userref.sys.id === userChosen;
+    })
+    console.log(filteredPosts)
+    setUserPosts(filteredPosts);
+    setCurrentArray(userPosts);
+  }
+
   return (
     <div>
       {/*Header*/}
       <header>
         <h1 className='header-heading'>Pinterest(ing)</h1>
         <div className='search-wrapper'>
-          <input className='header-search' />
-          <input className='search-button' type='submit' value='Search' />
+          <input className='header-search' type="text"/>
+          <button className='search-button' type='submit' value='Search'>Search</button>
         </div>
       </header>
       <main>
@@ -36,15 +61,23 @@ function App() {
         <div className='buttons-wrapper'>
           <button className='home-button'>Home</button>
           <div className='line'></div>
-          <form className='user-selection'>
+          <form className='user-selection' onSubmit={
+            (e) => {
+              e.preventDefault();
+              postFilter();
+            }
+          } >
               <label for='users'>Choose a user:</label>
-              <select name='users' id='users'>
-                  <option className='user-option' value='u1'>User 1</option>
-                  <option className='user-option' value='u2'>User 2</option>
-                  <option className='user-option' value='u3'>User 3</option>
-                  <option className='user-option' value='u4'>User 4</option>
+              <select name='users' id='users' onChange={(e) => {
+                setUserChosen(e.target.value)
+                console.log(userChosen)
+              }}>
+                  <option className='user-option' value='p1JoFPYPlrr8V0Wd8c7TR'>uzumakinaruto</option>
+                  <option className='user-option' value='YuhkG6S0znAiMmfmu4djN'>victormuller</option>
+                  <option className='user-option' value='3x1G3uU4sgpj8ajbV6Blrg'>God</option>
+                  <option className='user-option' value='3AQ9o22WxPtOejRNuxUTN9'>ericsquarepants</option>
               </select>
-              <input className='user-search-button' type='submit' value='Show' />
+              <button className='user-search-button' type='submit'>Show</button>
           </form>
           <div className='line'></div>
           <div className='checkbox-wrapper'>
@@ -52,7 +85,7 @@ function App() {
               <input className='post-checkbox' type='checkbox' />
           </div>
         </div>
-        <Postlist array={postsArray} />
+            <Postlist array={currentArray} />
       </main>
       <Footer />
     </div>
