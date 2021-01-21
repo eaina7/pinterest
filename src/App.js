@@ -47,6 +47,7 @@ function App() {
   }
 
   return (
+    userArray && allPosts ?
     <div>
       {/*Header*/}
       <header>
@@ -106,6 +107,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    :null
   );
 }
 

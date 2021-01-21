@@ -10,8 +10,8 @@ export default function Postlist({ array, userArray }) {
       {array.map(entry => {
         let userName = userArray.filter((user) => {
           return entry.fields.userref.sys.id === user.sys.id;
-        })
-        return <Post post={entry} username={userName[0]}/>;
+        })[0]
+        return <Post post={entry} username={userName.fields.username}/>;
       })}
     </div>
   );
