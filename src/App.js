@@ -32,7 +32,7 @@ function App() {
 
     getUserArray().then(response =>{
       //console.log(response.items);
-      setUserArray([response.items]);
+      setUserArray(response.items);
     })
   }, []);
 
@@ -45,7 +45,6 @@ function App() {
     setUserPosts(filteredPosts);
     setCurrentArray(userPosts);
   }
-
   return (
     <div>
       {/*Header*/}
@@ -72,10 +71,10 @@ function App() {
                 setUserChosen(e.target.value)
                 console.log(userChosen)
               }}>
-                  <option className='user-option' value='p1JoFPYPlrr8V0Wd8c7TR'>uzumakinaruto</option>
-                  <option className='user-option' value='YuhkG6S0znAiMmfmu4djN'>victormuller</option>
-                  <option className='user-option' value='3x1G3uU4sgpj8ajbV6Blrg'>God</option>
-                  <option className='user-option' value='3AQ9o22WxPtOejRNuxUTN9'>ericsquarepants</option>
+                  {userArray.map((user) => {
+                    console.log(user);
+                    return <option className="user-option" value={user.sys.id}>{user.fields.username}</option>
+                  })}
               </select>
               <button className='user-search-button' type='submit'>Show</button>
           </form>
@@ -85,7 +84,7 @@ function App() {
               <input className='post-checkbox' type='checkbox' />
           </div>
         </div>
-            <Postlist array={currentArray} />
+            
       </main>
       <Footer />
     </div>
