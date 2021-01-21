@@ -37,17 +37,15 @@ function App() {
     });
   }, []);
 
-
-  const filterPosts = (id) => {
-    const filteredArray= allPosts.filter((post) => {
+  const filterPosts = id => {
+    const filteredArray = allPosts.filter(post => {
       return post.fields.userref.sys.id === id;
-    })
-    console.log(filteredArray)
+    });
+    console.log(filteredArray);
     return filteredArray;
-  }
+  };
 
-  return (
-    userArray && allPosts ?
+  return userArray && allPosts ? (
     <div>
       {/*Header*/}
       <header>
@@ -72,7 +70,7 @@ function App() {
               onClick={e => {
                 setUserChosen(e.target.id);
                 //console.log(userChosen);
-                setUpdatedArray(filterPosts(e.target.id))
+                setUpdatedArray(filterPosts(e.target.id));
               }}
             >
               {userArray.map(user => {
@@ -98,17 +96,16 @@ function App() {
         </div>
         <Switch>
           <Route path="/">
-            <Postlist array={updatedArray} userArray={userArray}/>
+            <Postlist array={updatedArray} userArray={userArray} />
           </Route>
           <Route path={`/posts/user/${userChosen}`}>
-            <Postlist array={updatedArray} userArray={userArray}/>
+            <Postlist array={updatedArray} userArray={userArray} />
           </Route>
         </Switch>
       </main>
       <Footer />
     </div>
-    :null
-  );
+  ) : null;
 }
 
 export default App;
