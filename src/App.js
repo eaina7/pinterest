@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 function App() {
   const [allPosts, setAllPosts] = useState([]);
   const [userArray, setUserArray] = useState([]);
-  const [userChosen, setUserChosen] = useState('');
+  let [updatedArray, setUpdatedArray] = useState([]);
+  let [userChosen, setUserChosen] = useState('');
 
   useEffect(() => {
     const getPostArray = async () => {
@@ -27,6 +28,7 @@ function App() {
     };
     getPostArray().then(response => {
       setAllPosts(response);
+      setUpdatedArray(response);
     });
 
     getUserArray().then(response => {
@@ -34,6 +36,15 @@ function App() {
       setUserArray(response.items);
     });
   }, []);
+
+
+  const filterPosts = (id) => {
+    const filteredArray= allPosts.filter((post) => {
+      return post.fields.userref.sys.id === id;
+    })
+    console.log(filteredArray)
+    return filteredArray;
+  }
 
   return (
     <div>
@@ -60,6 +71,7 @@ function App() {
               onClick={e => {
                 setUserChosen(e.target.id);
                 //console.log(userChosen);
+                setUpdatedArray(filterPosts(e.target.id))
               }}
             >
               {userArray.map(user => {
@@ -85,10 +97,10 @@ function App() {
         </div>
         <Switch>
           <Route path="/">
-            <Postlist array={allPosts} />
+            <Postlist array={updatedArray} userArray={userArray}/>
           </Route>
-          <Route path={`/posts/user/:userId`}>
-            <Postlist array={allPosts} />
+          <Route path={`/posts/user/${userChosen}`}>
+            <Postlist array={updatedArray} userArray={userArray}/>
           </Route>
         </Switch>
       </main>
