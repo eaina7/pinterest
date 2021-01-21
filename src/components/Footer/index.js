@@ -4,7 +4,7 @@ import './index.css';
 function Footer() {
   return (
     <footer>
-      <div class="copyright">
+      <div className="copyright">
         COPYRIGHT &#169; Lorem ipsum dolor sit amet consectetur adipisicing
         elit. Eveniet, harum
       </div>

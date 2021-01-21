@@ -1,10 +1,10 @@
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 function GoHomeButton() {
-  let history = useHistory();
-  
+  const history = useHistory();
+
   function handleHistory() {
-    history.push("/home");
+    history.push('/');
   }
 
   return (
@@ -13,4 +13,4 @@ function GoHomeButton() {
     </button>
   );
 }
-export default GoHomeButton
+export default GoHomeButton;

@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './index.css';
 
-function PostDetailed({ getPostInfo }) {
+function PostDetailed({ posts }) {
   const { postId } = useParams();
+  const [postDetails, setPostDetails] = useState('');
 
-  const [postDetails, setPostDetails] = useState(getPostInfo(postId));
+  const getPostInfo = id => {
+    const post = posts.filter(post => post.sys.id === id)[0].fields;
+    return post;
+  };
+
+  useEffect(() => {
+    setPostDetails(getPostInfo(postId));
+  }, [posts, postId]);
 
   return postDetails ? (
-    <article class="post-entry">
-      <div class="post-entry__left-wrapper">
-        <h3 class="post-entry__title">{postDetails.fields.title}</h3>
+    <article className="post-entry">
+      <div className="post-entry__left-wrapper">
+        <h3 className="post-entry__title">{postDetails.title}</h3>
         <img
-          class="post-entry__image"
+          className="post-entry__image"
           src="https://picsum.photos/seed/picsum/700/500"
         />
       </div>
-      <div class="post-entry__right-wrapper">
-        <button class="post-entry__home-btn">Back</button>
-        <div class="post-entry__content">
-          <div class="post-entry__date">{postDetails.fields.date}</div>
-          <div class="post-entry__description">
-            {postDetails.fields.description}
+      <div className="post-entry__right-wrapper">
+        <button className="post-entry__home-btn">Back</button>
+        <div className="post-entry__content">
+          <div className="post-entry__date">{postDetails.date}</div>
+          <div className="post-entry__description">
+            {postDetails.description}
           </div>
-          <div class="post-entry__rating">
+          <div className="post-entry__rating">
             <strong>Rating: </strong>
-            {postDetails.fields.rating}
+            {postDetails.rating}
           </div>
         </div>
-        <a class="post-entry__user">User 1</a>
+        <a className="post-entry__user">User 1</a>
       </div>
     </article>
   ) : null;
