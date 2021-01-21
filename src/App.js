@@ -8,8 +8,6 @@ import Footer from './components/Footer';
 
 function App() {
   const [allPosts, setAllPosts] = useState([]);
-  const [userPosts , setUserPosts] = useState([]);
-  const [currentArray, setCurrentArray] = useState([]);
   const [userArray, setUserArray] = useState([]);
   const [userChosen, setUserChosen] = useState("");
 
@@ -27,7 +25,6 @@ function App() {
     }
     getPostArray().then(response => {
       setAllPosts(response)
-      setCurrentArray(response)
     });
 
     getUserArray().then(response =>{
@@ -36,15 +33,6 @@ function App() {
     })
   }, []);
 
-  //console.log(currentArray);
-  const postFilter = (id) => {
-    const filteredPosts = allPosts.filter((post) => {
-        return post.fields.userref.sys.id === id;
-    })
-    console.log(filteredPosts)
-    setUserPosts(filteredPosts);
-    setCurrentArray(userPosts);
-  }
   return (
     <div>
       {/*Header*/}
@@ -64,11 +52,10 @@ function App() {
               <label for='users'>Choose a user:</label>
               <div name='users' id='users' onClick={(e) => {
                 setUserChosen(e.target.id)
-                postFilter(e.target.id);
-                console.log(userChosen);
+                //console.log(userChosen);
               }}>
                   {userArray.map((user) => {
-                    return <Link className="user-option" id={user.sys.id} to={`./${user.sys.id}`}>{user.fields.username}</Link>
+                    return <Link className="user-option" id={user.sys.id} to={`/posts/user/${user.sys.id}`}>{user.fields.username}</Link>
                   })}
               </div>
           </form>
@@ -82,8 +69,8 @@ function App() {
           <Route path="/">
             <Postlist array={allPosts} />
           </Route>
-          <Route path={`/${userChosen}`}>
-            <Postlist array={currentArray} />
+          <Route path={`/posts/user/:userId`}>
+            <Postlist array={allPosts} />
           </Route>
         </Switch>
       </main>
