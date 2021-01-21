@@ -91,7 +91,6 @@ header {
 }
 
 .home-button:hover {
-  height: 2.8rem;
   border-bottom: 2px solid #fff;
 }
 
@@ -113,7 +112,7 @@ header {
 }
 
 #users {
-  height: 2.7rem;
+  height: 3rem;
   width: 20rem;
   position: relative;
   display: flex;
@@ -124,7 +123,7 @@ header {
   color: #fff;
   font-size: 1.7rem;
   border: 2px solid #fff;
-  border-radius: 1rem;
+  border-radius: .5rem;
 }
 
 #users:hover .user-option {
@@ -133,15 +132,15 @@ header {
 
 .user-option {
   display: none;
-  height: 2.7rem;
-  min-width: 8rem;
+  height: 3rem;
+  min-width: 15rem;
   padding: 1.2rem;
   background-color: rgb(100, 100, 100);
-  font-size: 2rem;
+  font-size: 2.3rem;
   align-items: center;
   color: #fff;
-  border: 1px solid #fff;
-  border-radius: 1rem;
+  border: 2px solid #fff;
+  border-radius: .5rem;
   text-decoration: none;
   cursor: pointer;
 }
