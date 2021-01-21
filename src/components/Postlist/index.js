@@ -3,10 +3,14 @@ import React from 'react';
 import './index.css';
 import Post from '../Post';
 
-export default function Postlist({ array }) {
+export default function Postlist({array}) {
     return (
     <div className="images-wrapper">
-            <Post post={array} />
+      {array.map((entry) => {
+        return(
+            <Post post={entry} />
+        )
+      })}
     </div>
   );
 }

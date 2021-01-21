@@ -36,10 +36,10 @@ function App() {
     })
   }, []);
 
-
-  const postFilter = () => {
+  //console.log(currentArray);
+  const postFilter = (id) => {
     const filteredPosts = allPosts.filter((post) => {
-        return post.fields.userref.sys.id === userChosen;
+        return post.fields.userref.sys.id === id;
     })
     console.log(filteredPosts)
     setUserPosts(filteredPosts);
@@ -60,23 +60,17 @@ function App() {
         <div className='buttons-wrapper'>
           <button className='home-button'>Home</button>
           <div className='line'></div>
-          <form className='user-selection' onSubmit={
-            (e) => {
-              e.preventDefault();
-              postFilter();
-            }
-          } >
+          <form className='user-selection'>
               <label for='users'>Choose a user:</label>
-              <select name='users' id='users' onChange={(e) => {
-                setUserChosen(e.target.value)
-                console.log(userChosen)
+              <div name='users' id='users' onClick={(e) => {
+                setUserChosen(e.target.id)
+                postFilter(e.target.id);
+                console.log(userChosen);
               }}>
                   {userArray.map((user) => {
-                    console.log(user);
-                    return <option className="user-option" value={user.sys.id}>{user.fields.username}</option>
+                    return <Link className="user-option" id={user.sys.id} to={`./${user.sys.id}`}>{user.fields.username}</Link>
                   })}
-              </select>
-              <button className='user-search-button' type='submit'>Show</button>
+              </div>
           </form>
           <div className='line'></div>
           <div className='checkbox-wrapper'>
@@ -84,7 +78,14 @@ function App() {
               <input className='post-checkbox' type='checkbox' />
           </div>
         </div>
-            
+        <Switch>
+          <Route path="/">
+            <Postlist array={allPosts} />
+          </Route>
+          <Route path={`/${userChosen}`}>
+            <Postlist array={currentArray} />
+          </Route>
+        </Switch>
       </main>
       <Footer />
     </div>
