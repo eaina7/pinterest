@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-
+import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
@@ -9,17 +8,33 @@ import PostDetailed from './components/PostDetailed';
 import Footer from './components/Footer';
 
 function App() {
-  const [postsArray, setPostsArray] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [userArray, setUserArray] = useState([]);
+  let [updatedArray, setUpdatedArray] = useState([]);
+  let [userChosen, setUserChosen] = useState('');
 
   useEffect(() => {
     const getPostArray = async () => {
       const response = await axios.get(
-        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
+        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
       return response.data.items;
     };
+
+    const getUserArray = async () => {
+      const response = await axios.get(
+        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
+      );
+      return response.data;
+    };
     getPostArray().then(response => {
-      setPostsArray(response);
+      setAllPosts(response);
+      setUpdatedArray(response);
+    });
+
+    getUserArray().then(response => {
+      //console.log(response.items);
+      setUserArray(response.items);
     });
   }, []);
 
@@ -28,62 +43,79 @@ function App() {
     return post;
   };
 
-  //console.log(postsArray);
-  return (
-    <>
+  const filterPosts = id => {
+    const filteredArray = allPosts.filter(post => {
+      return post.fields.userref.sys.id === id;
+    });
+    console.log(filteredArray);
+    return filteredArray;
+  };
+
+  return userArray && allPosts ? (
+    <div>
       {/*Header*/}
       <header>
-        <h1 class="header-heading">Pinterest(ing)</h1>
-        <div class="search-wrapper">
-          <input class="header-search" />
-          <input class="search-button" type="submit" value="Search" />
+        <h1 className="header-heading">Pinterest(ing)</h1>
+        <div className="search-wrapper">
+          <input className="header-search" type="text" />
+          <button className="search-button" type="submit" value="Search">
+            Search
+          </button>
         </div>
       </header>
       <main>
         {/*Buttons/filtering section*/}
-        <div class="buttons-wrapper">
-          <button class="home-button">Home</button>
-          <div class="line"></div>
-          <form class="user-selection">
+        <div className="buttons-wrapper">
+          <button className="home-button">Home</button>
+          <div className="line"></div>
+          <form className="user-selection">
             <label for="users">Choose a user:</label>
-            <select name="users" id="users">
-              <option class="user-option" value="u1">
-                User 1
-              </option>
-              <option class="user-option" value="u2">
-                User 2
-              </option>
-              <option class="user-option" value="u3">
-                User 3
-              </option>
-              <option class="user-option" value="u4">
-                User 4
-              </option>
-            </select>
-            <input class="user-search-button" type="submit" value="Show" />
+            <div
+              name="users"
+              id="users"
+              onClick={e => {
+                setUserChosen(e.target.id);
+                //console.log(userChosen);
+                setUpdatedArray(filterPosts(e.target.id));
+              }}
+            >
+              {userArray.map(user => {
+                return (
+                  <Link
+                    className="user-option"
+                    id={user.sys.id}
+                    to={`/posts/user/${user.sys.id}`}
+                  >
+                    {user.fields.username}
+                  </Link>
+                );
+              })}
+            </div>
           </form>
-          <div class="line"></div>
-          <div class="checkbox-wrapper">
-            <label class="checkbox-desc" for="best-post">
+          <div className="line"></div>
+          <div className="checkbox-wrapper">
+            <label className="checkbox-desc" for="best-post">
               Show best posts:
             </label>
-            <input class="post-checkbox" type="checkbox" />
+            <input className="post-checkbox" type="checkbox" />
           </div>
         </div>
-
         <Switch>
+          <Route path="/">
+            <Postlist array={updatedArray} userArray={userArray} />
+          </Route>
+          <Route path={`/posts/user/${userChosen}`}>
+            <Postlist array={updatedArray} userArray={userArray} />
+          </Route>
           <Route path="/posts/:postId">
             <PostDetailed getPostInfo={getPostInfo} />
-          </Route>
-          <Route path="/">
-            <Postlist array={postsArray} />
           </Route>
         </Switch>
       </main>
 
       <Footer />
-    </>
-  );
+    </div>
+  ) : null;
 }
 
 export default App;
