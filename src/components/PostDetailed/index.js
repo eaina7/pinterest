@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import GoHomeButton from '../GoHomeButton';
 
 import './index.css';
 
@@ -7,14 +8,18 @@ function PostDetailed({ posts }) {
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState('');
 
-  useEffect(() => {
-    const getPostInfo = id => {
-      const post = posts.filter(post => post.sys.id === id)[0].fields;
-      return post;
-    };
+  const getPostInfo = id => {
+    const post = posts.filter(post => post.sys.id === id)[0].fields;
+    return post;
+  };
 
+  useEffect(() => {
     setPostDetails(getPostInfo(postId));
   }, [posts, postId]);
+
+  const formatDate = strDate => {
+    return strDate.substring(0, 10);
+  };
 
   return postDetails ? (
     <article className="post-entry">
@@ -27,9 +32,9 @@ function PostDetailed({ posts }) {
         />
       </div>
       <div className="post-entry__right-wrapper">
-        <button className="post-entry__home-btn">Back</button>
+        <GoHomeButton className="post-entry__home-btn" caption="back" />
         <div className="post-entry__content">
-          <div className="post-entry__date">{postDetails.date}</div>
+          <div className="post-entry__date">{formatDate(postDetails.date)}</div>
           <div className="post-entry__description">
             {postDetails.description}
           </div>
