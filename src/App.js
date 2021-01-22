@@ -4,48 +4,40 @@ import axios from 'axios';
 import './App.css';
 
 import Postlist from './components/Postlist';
+import PostDetailed from './components/PostDetailed';
 import Footer from './components/Footer';
 
 function App() {
-  const [allPosts, setAllPosts] = useState([]);
-  const [userArray, setUserArray] = useState([]);
-  let [updatedArray, setUpdatedArray] = useState([]);
-  let [userChosen, setUserChosen] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const getPostArray = async () => {
+    const getPosts = async () => {
       const response = await axios.get(
-        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
+        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
       return response.data.items;
     };
 
-    const getUserArray = async () => {
-      const response = await axios.get(
-        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
-      );
-      return response.data;
-    };
-    getPostArray().then(response => {
-      setAllPosts(response);
-      setUpdatedArray(response);
-    });
-
-    getUserArray().then(response => {
-      //console.log(response.items);
-      setUserArray(response.items);
+    getPosts().then(response => {
+      setPosts(response);
     });
   }, []);
 
-  const filterPosts = id => {
-    const filteredArray = allPosts.filter(post => {
-      return post.fields.userref.sys.id === id;
-    });
-    console.log(filteredArray);
-    return filteredArray;
-  };
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await axios.get(
+        'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
+      );
+      return response.data.items;
+    };
 
-  return userArray && allPosts ? (
+    getUsers().then(response => {
+      setUsers(response);
+    });
+  }, []);
+
+  return users && posts ? (
     <div>
       {/*Header*/}
       <header>
@@ -63,20 +55,13 @@ function App() {
           <button className="home-button">Home</button>
           <div className="line"></div>
           <form className="user-selection">
-            <label for="users">Choose a user:</label>
-            <div
-              name="users"
-              id="users"
-              onClick={e => {
-                setUserChosen(e.target.id);
-                //console.log(userChosen);
-                setUpdatedArray(filterPosts(e.target.id));
-              }}
-            >
-              {userArray.map(user => {
+            <label htmlFor="users">Choose a user:</label>
+            <div name="users" id="users">
+              {users.map(user => {
                 return (
                   <Link
                     className="user-option"
+                    key={user.sys.id}
                     id={user.sys.id}
                     to={`/posts/user/${user.sys.id}`}
                   >
@@ -88,21 +73,25 @@ function App() {
           </form>
           <div className="line"></div>
           <div className="checkbox-wrapper">
-            <label className="checkbox-desc" for="best-post">
+            <label className="checkbox-desc" htmlFor="best-post">
               Show best posts:
             </label>
             <input className="post-checkbox" type="checkbox" />
           </div>
         </div>
         <Switch>
-          <Route path="/">
-            <Postlist array={updatedArray} userArray={userArray} />
+          <Route exact path="/posts/user/:userId">
+            <Postlist posts={posts} users={users} />
           </Route>
-          <Route path={`/posts/user/${userChosen}`}>
-            <Postlist array={updatedArray} userArray={userArray} />
+          <Route exact path="/posts/:postId">
+            <PostDetailed posts={posts} />
+          </Route>
+          <Route path={['/', '/posts']}>
+            <Postlist posts={posts} users={users} />
           </Route>
         </Switch>
       </main>
+
       <Footer />
     </div>
   ) : null;
