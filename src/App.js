@@ -80,13 +80,13 @@ function App() {
           </div>
         </div>
         <Switch>
-          <Route path="/posts/user/:userId">
+          <Route exact path="/posts/user/:userId">
             <Postlist posts={posts} users={users} />
           </Route>
-          <Route path="/posts/:postId">
+          <Route exact path="/posts/:postId">
             <PostDetailed posts={posts} />
           </Route>
-          <Route path="/">
+          <Route path={['/', '/posts']}>
             <Postlist posts={posts} users={users} />
           </Route>
         </Switch>

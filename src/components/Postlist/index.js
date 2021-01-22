@@ -15,7 +15,7 @@ export default function Postlist({ posts, users }) {
     userId
       ? setPostList(posts.filter(post => post.fields.userref.sys.id === userId))
       : setPostList(posts);
-  }, [posts]);
+  }, [posts, userId]);
 
   useEffect(() => {
     setUserList(users);
