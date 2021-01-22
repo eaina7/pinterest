@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-function GoHomeButton() {
+export default function GoHomeButton({ className, caption }) {
   const history = useHistory();
 
   function handleHistory() {
@@ -8,9 +8,8 @@ function GoHomeButton() {
   }
 
   return (
-    <button type="button" onClick={handleHistory}>
-      Go home
+    <button type="button" className={className} onClick={handleHistory}>
+      {caption}
     </button>
   );
 }
-export default GoHomeButton;

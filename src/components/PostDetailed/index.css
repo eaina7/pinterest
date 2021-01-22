@@ -42,6 +42,7 @@
 }
 
 .post-entry__home-btn {
+  cursor: pointer;
   width: 13%;
   height: 3rem;
   align-self: flex-end;

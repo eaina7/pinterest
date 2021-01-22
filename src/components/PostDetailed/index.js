@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import GoHomeButton from '../GoHomeButton';
 
 import './index.css';
 
@@ -27,7 +28,7 @@ function PostDetailed({ posts }) {
         />
       </div>
       <div className="post-entry__right-wrapper">
-        <button className="post-entry__home-btn">Back</button>
+        <GoHomeButton className="post-entry__home-btn" caption="back" />
         <div className="post-entry__content">
           <div className="post-entry__date">{postDetails.date}</div>
           <div className="post-entry__description">
