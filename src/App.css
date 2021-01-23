@@ -88,6 +88,7 @@ header {
   font-family: 'Roboto', sans-serif;
   font-size: 2.5rem;
   border: none;
+  cursor: pointer;
 }
 
 .home-button:hover {
@@ -123,7 +124,7 @@ header {
   color: #fff;
   font-size: 1.7rem;
   border: 2px solid #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 #users:hover .user-option {
@@ -140,7 +141,7 @@ header {
   align-items: center;
   color: #fff;
   border: 2px solid #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   text-decoration: none;
   cursor: pointer;
 }
