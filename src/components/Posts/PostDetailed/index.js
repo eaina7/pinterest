@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import GoHomeButton from '../../GoHomeButton';
 
 import './index.css';
@@ -20,7 +22,9 @@ export default function PostDetailed({ post }) {
             <strong>Rating: </strong>
             {post.rating}
           </div>
-          <a className="post-entry__user">{post.userName}</a>
+          <Link className="post-entry__user" to={`/posts/user/${post.userId}`}>
+            {post.userName}
+          </Link>
         </div>
       </div>
     </article>

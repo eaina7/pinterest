@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './index.css';
 
-const FilterBestPosts = React.forwardRef(({}, filterBestPosts) => {
+const FilterBestPosts = React.forwardRef(({ props }, filterBestPosts) => {
   const history = useHistory();
 
   const bestPostsClickHandler = () => {
