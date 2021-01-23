@@ -1,4 +1,4 @@
-import GoHomeButton from '../GoHomeButton';
+import GoHomeButton from '../../GoHomeButton';
 
 import './index.css';
 

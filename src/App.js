@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, Switch, Route, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+
+import FilterUser from './components/Filters/FilterUser';
+import FilterBestPosts from './components/Filters/FilterBestPosts';
 
 import AllPosts from './views/AllPosts';
 import UserPosts from './views/UserPosts';
@@ -12,12 +15,8 @@ import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
 
 function App() {
-  const history = useHistory();
-
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
-
-  const bestPostsFilter = useRef();
 
   const formatDate = strDate => {
     return strDate.substring(0, 10);
@@ -45,25 +44,24 @@ function App() {
         userId: fields.userref.sys.id
       }));
 
+      const users = usersResponse.map(({ sys, fields }) => ({
+        id: sys.id,
+        userName: fields.username
+      }));
+
       posts.map(
         post =>
-          (post.userName = usersResponse.filter(
-            user => user.sys.id === post.userId
-          )[0].fields.username)
+          (post.userName = users.filter(
+            user => user.id === post.userId
+          )[0].userName)
       );
 
       setPosts(posts);
-      setUsers(usersResponse);
+      setUsers(users);
     };
 
     doRequests();
   }, []);
-
-  const bestPostsClickHandler = () => {
-    bestPostsFilter.current.checked
-      ? history.push('/posts/best')
-      : history.push('/');
-  };
 
   return (
     <div>
@@ -74,38 +72,10 @@ function App() {
           <div className="line"></div>
           <form className="user-selection">
             <label htmlFor="users">Choose a user:</label>
-            {users.length ? (
-              <div name="users" id="users">
-                {users.map(user => {
-                  return (
-                    <Link
-                      className="user-option"
-                      key={user.sys.id}
-                      id={user.sys.id}
-                      to={`/posts/user/${user.sys.id}`}
-                    >
-                      {user.fields.username}
-                    </Link>
-                  );
-                })}
-              </div>
-            ) : null}
+            {users.length ? <FilterUser users={users} /> : null}
           </form>
           <div className="line"></div>
-          <div className="checkbox-wrapper">
-            <label className="checkbox-desc" htmlFor="best-post">
-              Show best posts:
-            </label>
-            <label className="switch">
-              <input
-                ref={bestPostsFilter}
-                className="post-checkbox"
-                type="checkbox"
-                onClick={bestPostsClickHandler}
-              />
-              <span className="slider round"></span>
-            </label>
-          </div>
+          <FilterBestPosts />
         </div>
       </header>
       <main>

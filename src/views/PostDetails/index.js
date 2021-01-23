@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import PostDetailed from '../../components/PostDetailed';
+import PostDetailed from '../../components/Posts/PostDetailed';
 
 function PostDetails({ posts }) {
   const { postId } = useParams();

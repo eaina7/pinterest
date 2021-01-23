@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import PostList from '../../components/PostList';
+import PostList from '../../components/Posts/PostList';
 
 export default function UserPosts({ posts }) {
   const { userId } = useParams();
