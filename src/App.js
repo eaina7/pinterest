@@ -65,9 +65,8 @@ function App() {
       : history.push('/');
   };
 
-  return posts.length && users.length ? (
+  return (
     <div>
-      {/*Header*/}
       <header>
         <h1 className="header-heading">Pinterest(ing)</h1>
         <div className="buttons-wrapper">
@@ -75,20 +74,22 @@ function App() {
           <div className="line"></div>
           <form className="user-selection">
             <label htmlFor="users">Choose a user:</label>
-            <div name="users" id="users">
-              {users.map(user => {
-                return (
-                  <Link
-                    className="user-option"
-                    key={user.sys.id}
-                    id={user.sys.id}
-                    to={`/posts/user/${user.sys.id}`}
-                  >
-                    {user.fields.username}
-                  </Link>
-                );
-              })}
-            </div>
+            {users.length ? (
+              <div name="users" id="users">
+                {users.map(user => {
+                  return (
+                    <Link
+                      className="user-option"
+                      key={user.sys.id}
+                      id={user.sys.id}
+                      to={`/posts/user/${user.sys.id}`}
+                    >
+                      {user.fields.username}
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : null}
           </form>
           <div className="line"></div>
           <div className="checkbox-wrapper">
@@ -108,25 +109,27 @@ function App() {
         </div>
       </header>
       <main>
-        <Switch>
-          <Route path="/posts/best">
-            {posts.length ? <BestPosts posts={posts} /> : null}
-          </Route>
-          <Route path="/posts/user/:userId">
-            {posts.length ? <UserPosts posts={posts} /> : null}
-          </Route>
-          <Route path="/posts/:postId">
-            {posts.length ? <PostDetails posts={posts} /> : null}
-          </Route>
-          <Route path={['/', '/posts']}>
-            {posts.length ? <AllPosts posts={posts} /> : null}
-          </Route>
-        </Switch>
+        {posts.length ? (
+          <Switch>
+            <Route path="/posts/best">
+              <BestPosts posts={posts} />
+            </Route>
+            <Route path="/posts/user/:userId">
+              <UserPosts posts={posts} />
+            </Route>
+            <Route path="/posts/:postId">
+              <PostDetails posts={posts} />
+            </Route>
+            <Route path={['/', '/posts']}>
+              <AllPosts posts={posts} />
+            </Route>
+          </Switch>
+        ) : null}
       </main>
 
       <Footer />
     </div>
-  ) : null;
+  );
 }
 
 export default App;
