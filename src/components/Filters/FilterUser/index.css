@@ -1,0 +1,52 @@
+.user-selection {
+  height: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+}
+
+#users {
+  height: 3rem;
+  width: 20rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  margin-left: 1rem;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  font-size: 1.7rem;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+#users:hover .user-option {
+  opacity: 1;
+  visibility: visible;
+}
+
+.user-option {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  height: 3.5rem;
+  min-width: 15rem;
+  padding: 1.2rem;
+  background-color: rgb(100, 100, 100);
+  align-items: center;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  font-size: 2.3rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-option:hover {
+  background-color: rgb(78, 140, 255);
+}
