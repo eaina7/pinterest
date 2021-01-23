@@ -18,8 +18,14 @@ export default function App() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
+  const filterBestPosts = React.createRef();
+
   const formatDate = strDate => {
     return strDate.substring(0, 10);
+  };
+
+  const resetFilters = () => {
+    filterBestPosts.current.checked = false;
   };
 
   useEffect(() => {
@@ -72,10 +78,12 @@ export default function App() {
           <div className="line"></div>
           <form className="user-selection">
             <label htmlFor="users">Choose a user:</label>
-            {users.length ? <FilterUser users={users} /> : null}
+            {users.length ? (
+              <FilterUser users={users} resetFilters={resetFilters} />
+            ) : null}
           </form>
           <div className="line"></div>
-          <FilterBestPosts />
+          <FilterBestPosts ref={filterBestPosts} />
         </div>
       </header>
       <main>

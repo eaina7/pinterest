@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './index.css';
 
-export default function FilterUser({ users }) {
+export default function FilterUser({ users, resetFilters }) {
   return (
     <div name="users" id="users">
       {users.map(user => {
@@ -13,6 +13,7 @@ export default function FilterUser({ users }) {
             key={user.id}
             id={user.id}
             to={`/posts/user/${user.id}`}
+            onClick={() => resetFilters()}
           >
             {user.userName}
           </Link>

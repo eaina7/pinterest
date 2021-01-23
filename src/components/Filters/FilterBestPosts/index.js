@@ -3,13 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 
 import './index.css';
 
-export default function FilterBestPosts() {
+const FilterBestPosts = React.forwardRef(({}, filterBestPosts) => {
   const history = useHistory();
 
-  const bestPostsFilter = useRef();
-
   const bestPostsClickHandler = () => {
-    bestPostsFilter.current.checked
+    filterBestPosts.current.checked
       ? history.push('/posts/best')
       : history.push('/');
   };
@@ -21,7 +19,7 @@ export default function FilterBestPosts() {
       </label>
       <label className="switch">
         <input
-          ref={bestPostsFilter}
+          ref={filterBestPosts}
           className="post-checkbox"
           type="checkbox"
           onClick={bestPostsClickHandler}
@@ -30,4 +28,6 @@ export default function FilterBestPosts() {
       </label>
     </div>
   );
-}
+});
+
+export default FilterBestPosts;
