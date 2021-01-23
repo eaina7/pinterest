@@ -55,12 +55,14 @@ export default function App() {
         userName: fields.username
       }));
 
-      posts.map(
-        post =>
-          (post.userName = users.filter(
-            user => user.id === post.userId
-          )[0].userName)
-      );
+      posts.forEach(post => {
+        const user = usersResponse.filter(
+          user => user.sys.id === post.userId
+        )[0];
+        post.userName = user.fields.username;
+        post.firstName = user.fields.firstname;
+        post.lastName = user.fields.lastname;
+      });
 
       setPosts(posts);
       setUsers(users);

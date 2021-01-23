@@ -22,8 +22,9 @@ export default function PostDetailed({ post }) {
             <strong>Rating: </strong>
             {post.rating}
           </div>
+          by{' '}
           <Link className="post-entry__user" to={`/posts/user/${post.userId}`}>
-            {post.userName}
+            {`${post.userName} (${post.firstName} ${post.lastName})`}
           </Link>
         </div>
       </div>
