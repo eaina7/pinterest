@@ -20,7 +20,7 @@ function PostDetailed({ post }) {
             <strong>Rating: </strong>
             {post.rating}
           </div>
-          <a className="post-entry__user">User 1</a>
+          <a className="post-entry__user">{post.userName}</a>
         </div>
       </div>
     </article>

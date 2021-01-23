@@ -45,6 +45,13 @@ function App() {
         userId: fields.userref.sys.id
       }));
 
+      posts.map(
+        post =>
+          (post.userName = usersResponse.filter(
+            user => user.sys.id === post.userId
+          )[0].fields.username)
+      );
+
       setPosts(posts);
       setUsers(usersResponse);
     };
@@ -88,38 +95,31 @@ function App() {
             <label className="checkbox-desc" htmlFor="best-post">
               Show best posts:
             </label>
-            <label class="switch">
+            <label className="switch">
               <input
                 ref={bestPostsFilter}
                 className="post-checkbox"
                 type="checkbox"
                 onClick={bestPostsClickHandler}
               />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
           </div>
         </div>
       </header>
       <main>
-        {/*Buttons/filtering section*/}
         <Switch>
           <Route path="/posts/best">
-            {posts.length && users.length ? (
-              <BestPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <BestPosts posts={posts} /> : null}
           </Route>
           <Route path="/posts/user/:userId">
-            {posts.length && users.length ? (
-              <UserPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <UserPosts posts={posts} /> : null}
           </Route>
           <Route path="/posts/:postId">
             {posts.length ? <PostDetails posts={posts} /> : null}
           </Route>
           <Route path={['/', '/posts']}>
-            {posts.length && users.length ? (
-              <AllPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <AllPosts posts={posts} /> : null}
           </Route>
         </Switch>
       </main>
