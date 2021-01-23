@@ -37,7 +37,7 @@ function App() {
     });
   }, []);
 
-  return users && posts ? (
+  return posts.length && users.length ? (
     <div>
       {/*Header*/}
       <header>
@@ -80,14 +80,18 @@ function App() {
           </div>
         </div>
         <Switch>
-          <Route exact path="/posts/user/:userId">
-            <Postlist posts={posts} users={users} />
+          <Route path="/posts/user/:userId">
+            {posts.length && users.length ? (
+              <Postlist posts={posts} users={users} />
+            ) : null}
           </Route>
-          <Route exact path="/posts/:postId">
-            <PostDetailed posts={posts} />
+          <Route path="/posts/:postId">
+            {posts.length ? <PostDetailed posts={posts} /> : null}
           </Route>
           <Route path={['/', '/posts']}>
-            <Postlist posts={posts} users={users} />
+            {posts.length && users.length ? (
+              <Postlist posts={posts} users={users} />
+            ) : null}
           </Route>
         </Switch>
       </main>

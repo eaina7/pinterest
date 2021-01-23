@@ -7,7 +7,6 @@ import Post from '../Post';
 
 export default function Postlist({ posts, users }) {
   const [postList, setPostList] = useState();
-  const [userList, setUserList] = useState();
 
   const { userId } = useParams();
 
@@ -17,14 +16,10 @@ export default function Postlist({ posts, users }) {
       : setPostList(posts);
   }, [posts, userId]);
 
-  useEffect(() => {
-    setUserList(users);
-  }, [users]);
-
   return postList ? (
     <div className="images-wrapper">
       {postList.map(post => {
-        const userName = userList.filter(user => {
+        const userName = users.filter(user => {
           return post.fields.userref.sys.id === user.sys.id;
         })[0];
         return (
