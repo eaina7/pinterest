@@ -31,15 +31,17 @@ function PostDetailed({ posts }) {
         <GoHomeButton className="post-entry__home-btn" caption="back" />
         <div className="post-entry__content">
           <div className="post-entry__date">{formatDate(postDetails.date)}</div>
+          <div class="post-entry__line"></div>
           <div className="post-entry__description">
             {postDetails.description}
           </div>
+          <div class="post-entry__line"></div>
           <div className="post-entry__rating">
             <strong>Rating: </strong>
             {postDetails.rating}
           </div>
+          <a className="post-entry__user">User 1</a>
         </div>
-        <a className="post-entry__user">User 1</a>
       </div>
     </article>
   ) : null;
