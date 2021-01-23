@@ -19,30 +19,44 @@ function App() {
 
   const bestPostsFilter = useRef();
 
+  const formatDate = strDate => {
+    return strDate.substring(0, 10);
+  };
+
   useEffect(() => {
-    const getPosts = async () => {
-      const response = await axios.get(
+    const doRequests = async () => {
+      let postsResponse = await axios.get(
         'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
-      return response.data.items;
-    };
-
-    getPosts().then(response => {
-      setPosts(response);
-    });
-  }, []);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios.get(
+      let usersResponse = await axios.get(
         'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
-      return response.data.items;
+
+      postsResponse = postsResponse.data.items;
+      usersResponse = usersResponse.data.items;
+
+      const posts = postsResponse.map(({ sys, fields }) => ({
+        id: sys.id,
+        date: formatDate(fields.date),
+        title: fields.title,
+        description: fields.description,
+        image: fields.image,
+        rating: fields.rating,
+        userId: fields.userref.sys.id
+      }));
+
+      posts.map(
+        post =>
+          (post.userName = usersResponse.filter(
+            user => user.sys.id === post.userId
+          )[0].fields.username)
+      );
+
+      setPosts(posts);
+      setUsers(usersResponse);
     };
 
-    getUsers().then(response => {
-      setUsers(response);
-    });
+    doRequests();
   }, []);
 
   const bestPostsClickHandler = () => {
@@ -81,38 +95,31 @@ function App() {
             <label className="checkbox-desc" htmlFor="best-post">
               Show best posts:
             </label>
-            <label class="switch">
+            <label className="switch">
               <input
                 ref={bestPostsFilter}
                 className="post-checkbox"
                 type="checkbox"
                 onClick={bestPostsClickHandler}
               />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
           </div>
         </div>
       </header>
       <main>
-        {/*Buttons/filtering section*/}
         <Switch>
           <Route path="/posts/best">
-            {posts.length && users.length ? (
-              <BestPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <BestPosts posts={posts} /> : null}
           </Route>
           <Route path="/posts/user/:userId">
-            {posts.length && users.length ? (
-              <UserPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <UserPosts posts={posts} /> : null}
           </Route>
           <Route path="/posts/:postId">
             {posts.length ? <PostDetails posts={posts} /> : null}
           </Route>
           <Route path={['/', '/posts']}>
-            {posts.length && users.length ? (
-              <AllPosts posts={posts} users={users} />
-            ) : null}
+            {posts.length ? <AllPosts posts={posts} /> : null}
           </Route>
         </Switch>
       </main>
