@@ -14,7 +14,7 @@ import PostDetails from './views/PostDetails';
 import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
 
-function App() {
+export default function App() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -101,5 +101,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

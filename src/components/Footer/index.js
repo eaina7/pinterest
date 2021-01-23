@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 
-function Footer() {
+export default function Footer() {
   return (
     <footer>
       <div className="credits">
@@ -13,5 +13,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

@@ -2,7 +2,7 @@ import GoHomeButton from '../../GoHomeButton';
 
 import './index.css';
 
-function PostDetailed({ post }) {
+export default function PostDetailed({ post }) {
   return (
     <article className="post-entry">
       <div className="post-entry__left-wrapper">
@@ -26,5 +26,3 @@ function PostDetailed({ post }) {
     </article>
   );
 }
-
-export default PostDetailed;

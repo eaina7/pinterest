@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom';
 export default function GoHomeButton({ className, caption }) {
   const history = useHistory();
 
-  function handleHistory() {
+  function onClickHandler() {
     history.push('/');
   }
 
   return (
-    <button type="button" className={className} onClick={handleHistory}>
+    <button type="button" className={className} onClick={onClickHandler}>
       {caption}
     </button>
   );
