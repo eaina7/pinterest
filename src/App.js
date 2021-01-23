@@ -3,7 +3,8 @@ import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
-import Postlist from './components/Postlist';
+import AllPosts from './views/AllPosts';
+import UserPosts from './views/UserPosts';
 import PostDetailed from './components/PostDetailed';
 import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
@@ -83,7 +84,7 @@ function App() {
         <Switch>
           <Route path="/posts/user/:userId">
             {posts.length && users.length ? (
-              <Postlist posts={posts} users={users} />
+              <UserPosts posts={posts} users={users} />
             ) : null}
           </Route>
           <Route path="/posts/:postId">
@@ -91,7 +92,7 @@ function App() {
           </Route>
           <Route path={['/', '/posts']}>
             {posts.length && users.length ? (
-              <Postlist posts={posts} users={users} />
+              <AllPosts posts={posts} users={users} />
             ) : null}
           </Route>
         </Switch>
