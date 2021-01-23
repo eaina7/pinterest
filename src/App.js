@@ -56,15 +56,6 @@ function App() {
       {/*Header*/}
       <header>
         <h1 className="header-heading">Pinterest(ing)</h1>
-        <div className="search-wrapper">
-          <input className="header-search" type="text" />
-          <button className="search-button" type="submit" value="Search">
-            Search
-          </button>
-        </div>
-      </header>
-      <main>
-        {/*Buttons/filtering section*/}
         <div className="buttons-wrapper">
           <GoHomeButton className="home-button" caption="Home" />
           <div className="line"></div>
@@ -90,14 +81,20 @@ function App() {
             <label className="checkbox-desc" htmlFor="best-post">
               Show best posts:
             </label>
-            <input
-              ref={bestPostsFilter}
-              className="post-checkbox"
-              type="checkbox"
-              onClick={bestPostsClickHandler}
-            />
+            <label class="switch">
+              <input
+                ref={bestPostsFilter}
+                className="post-checkbox"
+                type="checkbox"
+                onClick={bestPostsClickHandler}
+              />
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
+      </header>
+      <main>
+        {/*Buttons/filtering section*/}
         <Switch>
           <Route path="/posts/best">
             {posts.length && users.length ? (
