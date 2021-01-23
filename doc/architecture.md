@@ -30,11 +30,6 @@ Stored in src/components
 
 Stored in src/views
 
-Views are composed of components as described on the wireframes:
-
-- [Main page](./design/wireframe_home.png)
-- [Post details page](./design/wireframe_post_details.png)
-
 1. _AllPosts_: Route "/" and "/posts": 
 2. _UserPosts_: Route "/posts/user/{userId}: only posts by user with id = _userId_
 3. _BestPosts_: Route "/posts/best": only posts with high rating = 5
