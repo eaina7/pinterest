@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Post({ post, username }) {
-  return post && username ? (
+  return (
     <Link to={`/posts/${post.sys.id}`}>
       <div className="post-image-wrapper">
         <img className="post-image" src={post.fields.image} alt="" />
@@ -13,5 +13,5 @@ export default function Post({ post, username }) {
         </div>
       </div>
     </Link>
-  ) : null;
+  );
 }

@@ -8,12 +8,12 @@ function PostDetailed({ posts }) {
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState('');
 
-  const getPostInfo = id => {
-    const post = posts.filter(post => post.sys.id === id)[0].fields;
-    return post;
-  };
-
   useEffect(() => {
+    const getPostInfo = id => {
+      const post = posts.filter(post => post.sys.id === id)[0].fields;
+      return post;
+    };
+
     setPostDetails(getPostInfo(postId));
   }, [posts, postId]);
 
