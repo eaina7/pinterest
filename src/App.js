@@ -5,6 +5,7 @@ import './App.css';
 
 import Postlist from './components/Postlist';
 import PostDetailed from './components/PostDetailed';
+import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
       <main>
         {/*Buttons/filtering section*/}
         <div className="buttons-wrapper">
-          <button className="home-button">Home</button>
+          <GoHomeButton className="home-button" caption="Home" />
           <div className="line"></div>
           <form className="user-selection">
             <label htmlFor="users">Choose a user:</label>
