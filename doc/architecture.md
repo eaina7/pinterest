@@ -12,15 +12,14 @@
 Stored in src/components
 
 **Posts**
-
+- _PostList_ (main page)
 - _Post_ (main page)
 - _PostDetailed_ (post detailed page)
 
 **Filters**
 
-- _PostTextSearch_
-- _UserFilter_ (dropdown filter)
-- _RatingFilter_ (checkbox)
+- _FilterUser_ (dropdown filter)
+- _FilterBestPosts_ (checkbox toggle)
 
 **Secondary components**
 
@@ -36,37 +35,8 @@ Views are composed of components as described on the wireframes:
 - [Main page](./design/wireframe_home.png)
 - [Post details page](./design/wireframe_post_details.png)
 
-1. _Posts_
+1. _AllPosts_: Route "/" and "/posts": 
+2. _UserPosts_: Route "/posts/user/{userId}: only posts by user with id = _userId_
+3. _BestPosts_: Route "/posts/best": only posts with high rating = 5
 
-- Route "/posts": all posts
-- Route "/posts/user/{userId}: only posts by user with id = _userId_
-- Route "/posts/highrating": only posts with high rating (to be defined)
-
-  These routes will show results after applying the filters set by the user.
-
-2. _PostDetails_
-
-- Route "posts/{postId}": only post with id = _postId_
-
-## Pages
-
-### Main page
-
-![](./img/main_page_components.png)
-
-### Post detailed page
-
-![](./img/post_detailed_page_components.png)
-
-## Pending
-
-1. For the view /posts/highrating we have several options:
-
-- We choose a fixed number (e.g., 5) and use and "=" operator.
-- We choose a rating limit value and all post with a grater value than the limit are considered post with high rating (e.g., for a limit of 5, all posts with rating greater than 5 are considered posts with high rating)
-
-  Regardless of the approach, the results can be directly retrieved from the API. See:
-
-  - https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/search-parameters/equality-operator
-
-  - https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/search-parameters/ranges
+4. _PostDetails_: Route "posts/{postId}": only post with id = _postId_
