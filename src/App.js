@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
 import AllPosts from './views/AllPosts';
 import UserPosts from './views/UserPosts';
+import BestPosts from './views/BestPosts';
+
 import PostDetailed from './components/PostDetailed';
 import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
 
 function App() {
+  const history = useHistory();
+
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+
+  const bestPostsFilter = useRef();
 
   useEffect(() => {
     const getPosts = async () => {
@@ -38,6 +44,12 @@ function App() {
       setUsers(response);
     });
   }, []);
+
+  const bestPostsClickHandler = () => {
+    bestPostsFilter.current.checked
+      ? history.push('/posts/best')
+      : history.push('/');
+  };
 
   return posts.length && users.length ? (
     <div>
@@ -78,10 +90,20 @@ function App() {
             <label className="checkbox-desc" htmlFor="best-post">
               Show best posts:
             </label>
-            <input className="post-checkbox" type="checkbox" />
+            <input
+              ref={bestPostsFilter}
+              className="post-checkbox"
+              type="checkbox"
+              onClick={bestPostsClickHandler}
+            />
           </div>
         </div>
         <Switch>
+          <Route path="/posts/best">
+            {posts.length && users.length ? (
+              <BestPosts posts={posts} users={users} />
+            ) : null}
+          </Route>
           <Route path="/posts/user/:userId">
             {posts.length && users.length ? (
               <UserPosts posts={posts} users={users} />
