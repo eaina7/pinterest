@@ -8,18 +8,12 @@ function PostDetails({ posts, users }) {
   const [postDetails, setPostDetails] = useState('');
 
   useEffect(() => {
-    const formatDate = strDate => {
-      return strDate.substring(0, 10);
-    };
-
-    const getPostInfo = id => {
+    const getPost = id => {
       const post = posts.filter(post => post.sys.id === id)[0].fields;
-      post.date = formatDate(post.date);
-
       return post;
     };
 
-    setPostDetails(getPostInfo(postId));
+    setPostDetails(getPost(postId));
   }, [posts, postId]);
 
   return <PostDetailed post={postDetails} />;

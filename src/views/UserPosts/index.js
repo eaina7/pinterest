@@ -6,7 +6,7 @@ export default function UserPosts({ posts, users }) {
   const { userId } = useParams();
 
   const filterPostsByUser = userId => {
-    return posts.filter(post => post.fields.userref.sys.id === userId);
+    return posts.filter(post => post.userId === userId);
   };
 
   return <PostList posts={filterPostsByUser(userId)} users={users} />;

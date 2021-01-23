@@ -8,11 +8,11 @@ export default function PostList({ posts, users }) {
     <div className="images-wrapper">
       {posts.map(post => {
         const userName = users.filter(user => {
-          return post.fields.userref.sys.id === user.sys.id;
+          return post.userId === user.sys.id;
         })[0];
         return (
           <Post
-            key={post.sys.id}
+            key={post.id}
             post={post}
             username={userName ? userName.fields.username : null}
           />
