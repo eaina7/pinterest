@@ -25,11 +25,7 @@ function PostDetailed({ posts }) {
     <article className="post-entry">
       <div className="post-entry__left-wrapper">
         <h3 className="post-entry__title">{postDetails.title}</h3>
-        <img
-          className="post-entry__image"
-          src="https://picsum.photos/seed/picsum/700/500"
-          alt=""
-        />
+        <img className="post-entry__image" src={postDetails.image} alt="" />
       </div>
       <div className="post-entry__right-wrapper">
         <GoHomeButton className="post-entry__home-btn" caption="back" />
