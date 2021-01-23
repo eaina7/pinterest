@@ -6,8 +6,8 @@ import './App.css';
 import AllPosts from './views/AllPosts';
 import UserPosts from './views/UserPosts';
 import BestPosts from './views/BestPosts';
+import PostDetails from './views/PostDetails';
 
-import PostDetailed from './components/PostDetailed';
 import GoHomeButton from './components/GoHomeButton';
 import Footer from './components/Footer';
 
@@ -107,7 +107,7 @@ function App() {
             ) : null}
           </Route>
           <Route path="/posts/:postId">
-            {posts.length ? <PostDetailed posts={posts} /> : null}
+            {posts.length ? <PostDetails posts={posts} /> : null}
           </Route>
           <Route path={['/', '/posts']}>
             {posts.length && users.length ? (
