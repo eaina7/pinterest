@@ -11,7 +11,7 @@ import UserPosts from './views/UserPosts';
 import BestPosts from './views/BestPosts';
 import PostDetails from './views/PostDetails';
 
-import GoHomeButton from './components/GoHomeButton';
+import GoBackButton from './components/GoBackButton';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -76,7 +76,7 @@ export default function App() {
       <header>
         <h1 className="header-heading">Pinterest(ing)</h1>
         <div className="buttons-wrapper">
-          <GoHomeButton className="home-button" caption="Home" />
+          <GoBackButton className="home-button" caption="Home" home="yes" />
           <div className="line"></div>
           <form className="user-selection">
             <label htmlFor="users">Choose a user:</label>

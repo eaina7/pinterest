@@ -1,10 +1,10 @@
 import { useHistory } from 'react-router-dom';
 
-export default function GoHomeButton({ className, caption }) {
+export default function GoBackButton({ className, caption, home }) {
   const history = useHistory();
 
   function onClickHandler() {
-    history.push('/');
+    home === 'yes' ? history.push('/') : history.goBack();
   }
 
   return (

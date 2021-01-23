@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import GoHomeButton from '../../GoHomeButton';
+import GoBackButton from '../../GoBackButton';
 
 import './index.css';
 
@@ -12,7 +12,11 @@ export default function PostDetailed({ post }) {
         <img className="post-entry__image" src={post.image} alt="" />
       </div>
       <div className="post-entry__right-wrapper">
-        <GoHomeButton className="post-entry__home-btn" caption="back" />
+        <GoBackButton
+          className="post-entry__home-btn"
+          caption="back"
+          home="no"
+        />
         <div className="post-entry__content">
           <div className="post-entry__date">{post.date}</div>
           <div className="post-entry__line"></div>
