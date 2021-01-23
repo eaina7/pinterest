@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import PostDetailed from '../../components/Posts/PostDetailed';
 
-function PostDetails({ posts }) {
+export default function PostDetails({ posts }) {
   const { postId } = useParams();
   const [post, setPost] = useState('');
 
@@ -18,5 +18,3 @@ function PostDetails({ posts }) {
 
   return <PostDetailed post={post} />;
 }
-
-export default PostDetails;
