@@ -32,6 +32,6 @@ Stored in src/views
 
 1. _AllPosts_: Route "/" and "/posts": 
 2. _UserPosts_: Route "/posts/user/{userId}: only posts by user with id = _userId_
-3. _BestPosts_: Route "/posts/best": only posts with high rating = 5
+3. _BestPosts_: Route "/posts/best": only posts with high = 5
 
 4. _PostDetails_: Route "posts/{postId}": only post with id = _postId_
