@@ -30,17 +30,18 @@ export default function App() {
 
   useEffect(() => {
     const doRequests = async () => {
-      let postsResponse = await axios.get(
+      const postsResponse = await axios.get(
         'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=post&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
-      let usersResponse = await axios.get(
+      const usersResponse = await axios.get(
         'https://cdn.contentful.com/spaces/kq9f5euhdm7x/environments/master/entries/?select=sys.id,fields&content_type=user&access_token=2x9QLBM2YqXGk3Pv4AKeEXF4AqqMVW0BuGsd144eP1c'
       );
 
-      postsResponse = postsResponse.data.items;
-      usersResponse = usersResponse.data.items;
+      let posts = postsResponse.data.items;
+      let users = usersResponse.data.items;
 
-      const posts = postsResponse.map(({ sys, fields }) => ({
+      // Cleaning up posts
+      posts = posts.map(({ sys, fields }) => ({
         id: sys.id,
         date: formatDate(fields.date),
         title: fields.title,
@@ -50,18 +51,26 @@ export default function App() {
         userId: fields.userref.sys.id
       }));
 
-      const users = usersResponse.map(({ sys, fields }) => ({
+      // Cleaning up users
+      users = users.map(({ sys, fields }) => ({
         id: sys.id,
-        userName: fields.username
+        userName: fields.username,
+        firstName: fields.firstname,
+        lastName: fields.lastname
       }));
 
-      posts.forEach(post => {
-        const user = usersResponse.filter(
-          user => user.sys.id === post.userId
-        )[0];
-        post.userName = user.fields.username;
-        post.firstName = user.fields.firstname;
-        post.lastName = user.fields.lastname;
+      /*
+      Adding user info to posts, so that the user array does not need to be passed
+      to post components
+      */
+      users.forEach(user => {
+        const userPosts = posts.filter(post => user.id === post.userId);
+
+        userPosts.forEach(userPost => {
+          userPost.userName = user.userName;
+          userPost.firstName = user.firstName;
+          userPost.lastName = user.lastName;
+        });
       });
 
       setPosts(posts);
