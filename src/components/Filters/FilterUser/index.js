@@ -11,7 +11,6 @@ export default function FilterUser({ users }) {
           <Link
             className="user-option"
             key={user.id}
-            id={user.id}
             to={`/posts/user/${user.id}`}
           >
             {user.userName}
