@@ -80,6 +80,15 @@
   letter-spacing: 0.5px;
 }
 
+.post-entry__user {
+  color: #fff;
+  transition: all .2s;
+}
+
+.post-entry__user:hover {
+  color: rgb(78, 140, 255);
+}
+
 .post-entry__line {
   width: 100%;
   height: 2px;
@@ -87,7 +96,7 @@
 }
 
 .post-entry__description {
-  margin: 2rem 0;
+  margin: 4rem 0;
   font-size: 2.5rem;
   font-weight: 500;
 }
