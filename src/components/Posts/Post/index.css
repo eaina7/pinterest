@@ -17,7 +17,7 @@
 .post-image {
   position: absolute;
   width: 100%;
-  opacity: 0.4;
+  opacity: 0.6;
   border-radius: 1rem;
   transition: all 0.2s;
 }
