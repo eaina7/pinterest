@@ -1,0 +1,61 @@
+.post-image-wrapper {
+  position: relative;
+  width: 30rem;
+  height: 34rem;
+  margin: 2% 1rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgb(100, 100, 100);
+  transition: all 0.2s;
+}
+
+.post-image-wrapper:hover {
+  overflow: visible;
+  z-index: 10;
+}
+
+.post-image {
+  position: absolute;
+  width: 100%;
+  opacity: 0.6;
+  border-radius: 1rem;
+  transition: all 0.2s;
+}
+
+.post-image-wrapper:hover .post-image {
+  opacity: 1;
+  box-shadow: 0 0.5rem 1rem rgb(49, 49, 49);
+  transform: scale(1.1);
+}
+
+.overlay {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.post-image-wrapper:hover .overlay {
+  opacity: 0;
+}
+
+.post-image-desc,
+.post-image-desc-title {
+  width: 90%;
+  margin: 0.8rem auto;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.15rem;
+  text-align: center;
+}
+
+.post-image-desc-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-decoration: underline;
+}

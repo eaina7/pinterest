@@ -1,0 +1,22 @@
+footer {
+  height: 7rem;
+  width: 100%;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff;
+}
+
+footer a:hover {
+  color: #2196f3;
+  transition: all .2s;
+}

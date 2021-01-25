@@ -1,0 +1,102 @@
+.post-entry {
+  width: 60%;
+  min-height: 20vh;
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: rgb(150, 150, 150);
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 2rem;
+}
+
+.post-entry__left-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 2px solid #fff;
+}
+
+.post-entry__right-wrapper {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2% 0;
+  margin: 0 auto;
+}
+
+.post-entry__title {
+  width: 90%;
+  margin-top: 3%;
+  text-align: center;
+  font-size: 4rem;
+  font-family: 'Dancing Script', sans-serif;
+}
+
+.post-entry__image {
+  width: 90%;
+  min-height: 40rem;
+  margin: 3%;
+  border: 2px solid #fff;
+}
+
+.post-entry__content {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: rgb(100, 100, 100);
+  border-radius: 1rem;
+}
+
+.post-entry__home-btn {
+  cursor: pointer;
+  width: 7rem;
+  height: 3rem;
+  margin: 3% 5% 30% 0;
+  align-self: flex-end;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 1.2rem;
+  font-size: 2rem;
+  transition: all 0.2s;
+}
+
+.post-entry__home-btn:hover {
+  background-color: rgb(78, 140, 255);
+}
+
+.post-entry__date,
+.post-entry__rating,
+.post-entry__user {
+  margin: 1rem 0;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.post-entry__user {
+  color: #fff;
+  transition: all .2s;
+}
+
+.post-entry__user:hover {
+  color: rgb(78, 140, 255);
+}
+
+.post-entry__line {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+}
+
+.post-entry__description {
+  margin: 4rem 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+}

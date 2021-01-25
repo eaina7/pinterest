@@ -1,0 +1,12 @@
+.images-wrapper {
+  width: 90%;
+  min-height: 10vh;
+  margin: 5rem auto;
+  padding: 4rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgb(150, 150, 150);
+  border-radius: 2rem;
+}
